@@ -32,7 +32,7 @@ const distPath = path.join(__dirname, "frontend", "dist");
 app.use(express.static(distPath));
 
 // Catch-all route: Send any other requests to the Vue app
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
