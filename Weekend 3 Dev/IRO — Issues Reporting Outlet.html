@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IRO — Issues Reporting Outlet</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #f4f6f8;
+        color: #1f2d3d;
+        line-height: 1.5;
+      }
+      header {
+        background: linear-gradient(135deg, #0b6623, #148f3a);
+        color: #fff;
+        padding: 20px 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      header h1 {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+      }
+      header p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-top: 4px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+      @media (max-width: 760px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 22px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      }
+      .card h2 {
+        font-size: 1.1rem;
+        color: #0b6623;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e6efe8;
+        padding-bottom: 8px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.85rem;
+        margin: 10px 0 5px;
+        color: #3a4a5c;
+        font-weight: 600;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 9px 11px;
+        border: 1px solid #d5dde5;
+        border-radius: 6px;
+        font-size: 0.92rem;
+        font-family: inherit;
+        transition: border 0.2s;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #148f3a;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      button.submit {
+        margin-top: 15px;
+        width: 100%;
+        background: #0b6623;
+        color: #fff;
+        border: none;
+        padding: 11px;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button.submit:hover {
+        background: #148f3a;
+      }
+
+      .report {
+        border-left: 4px solid #148f3a;
+        background: #f9fbfa;
+        padding: 10px 14px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .report .meta {
+        font-size: 0.75rem;
+        color: #6b7a8a;
+        margin-top: 4px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        margin-left: 6px;
+      }
+      .high {
+        background: #fde2e2;
+        color: #b00020;
+      }
+      .medium {
+        background: #fff4d6;
+        color: #946200;
+      }
+      .low {
+        background: #e0f2e9;
+        color: #0b6623;
+      }
+
+      .empty {
+        text-align: center;
+        color: #8a98a6;
+        font-style: italic;
+        padding: 20px;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #6b7a8a;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>IRO — Issues Reporting Outlet</h1>
+      <p>
+        A safe channel for AAUA Students & Indigenes (Akungba, Iwaro, Etioro,
+        Ayegunle…)
+      </p>
+    </header>
+
+    <div class="container">
+      <!-- REPORT FORM -->
+      <section class="card">
+        <h2>📝 Submit an Issue</h2>
+        <form id="reportForm">
+          <label for="reporter"
+            >Name (optional — leave blank for anonymity)</label
+          >
+          <input type="text" id="reporter" placeholder="Anonymous" />
+
+          <label for="community">Community / Group</label>
+          <select id="community" required>
+            <option value="">-- Select --</option>
+            <option>Akungba</option>
+            <option>Iwaro</option>
+            <option>Etioro</option>
+            <option>Ayegunle</option>
+            <option>AAUA Students (General)</option>
+            <option>Other</option>
+          </select>
+
+          <label for="category">Issue Category</label>
+          <select id="category" required>
+            <option value="">-- Select --</option>
+            <option>Security</option>
+            <option>Infrastructure</option>
+            <option>Academic</option>
+            <option>Welfare</option>
+            <option>Health</option>
+            <option>Disciplinary</option>
+            <option>Other</option>
+          </select>
+
+          <label for="priority">Priority</label>
+          <select id="priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+          </select>
+
+          <label for="title">Issue Title</label>
+          <input type="text" id="title" placeholder="Brief summary" required />
+
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            placeholder="Describe the issue clearly..."
+            required
+          ></textarea>
+
+          <button type="submit" class="submit">Submit Report</button>
+        </form>
+      </section>
+
+      <!-- REPORTS LIST -->
+      <section class="card">
+        <h2>📋 Recent Reports</h2>
+        <div id="reportsList"></div>
+      </section>
+    </div>
+
+    <footer>
+      &copy; 2026 IRO — Built for the AAUA Community. Confidential & Secure.
+    </footer>
+
+    <script>
+      const form = document.getElementById("reportForm");
+      const list = document.getElementById("reportsList");
+
+      function loadReports() {
+        return JSON.parse(localStorage.getItem("iro_reports") || "[]");
+      }
+
+      function saveReports(reports) {
+        localStorage.setItem("iro_reports", JSON.stringify(reports));
+      }
+
+      function renderReports() {
+        const reports = loadReports();
+        if (reports.length === 0) {
+          list.innerHTML =
+            '<div class="empty">No reports yet. Be the first to submit.</div>';
+          return;
+        }
+        list.innerHTML = reports
+          .slice()
+          .reverse()
+          .map(
+            (r) => `
+      <div class="report">
+        <strong>${escapeHtml(r.title)}</strong>
+        <span class="badge ${r.priority.toLowerCase()}">${r.priority}</span>
+        <div>${escapeHtml(r.description)}</div>
+        <div class="meta">
+          ${escapeHtml(r.community)} • ${escapeHtml(r.category)} • 
+          By: ${escapeHtml(r.reporter || "Anonymous")} • 
+          ${new Date(r.timestamp).toLocaleString()}
+        </div>
+      </div>
+    `,
+          )
+          .join("");
+      }
+
+      function escapeHtml(str) {
+        return str.replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const report = {
+          reporter: document.getElementById("reporter").value.trim(),
+          community: document.getElementById("community").value,
+          category: document.getElementById("category").value,
+          priority: document.getElementById("priority").value,
+          title: document.getElementById("title").value.trim(),
+          description: document.getElementById("description").value.trim(),
+          timestamp: Date.now(),
+        };
+        const reports = loadReports();
+        reports.push(report);
+        saveReports(reports);
+        form.reset();
+        renderReports();
+        alert("✅ Report submitted successfully. Thank you.");
+      });
+
+      renderReports();
+    </script>
+  </body>
+</html>
